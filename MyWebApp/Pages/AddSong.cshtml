@@ -1,0 +1,44 @@
+﻿@page
+@model MyWebApp.Pages.AddSongModel
+@{
+    ViewData["Title"] = "Add a Song";
+}
+<head>
+    <style>
+        h1{
+            text-align: center;
+            font-family: impact;
+            color: pink;
+            border-style: groove;
+            border-width: 15pt;
+            border-color: mistyrose;
+            margin-left: 35%;
+            margin-right: 35%;
+            height: 120px;
+            padding-top: 15px;
+            }
+        input {
+            width: 70%;   
+            }
+        div.songform {
+            margin-left:25%;
+        }
+        
+        .submitButton {
+            width:70%;
+            height:60px;
+           
+        }
+    </style>
+</head>
+<h1> Add a Song</h1>
+<form method="post" asp-page-handler="AddNewSong">
+    <p>
+    <div class="songform">
+    <label asp-for="newTitle">Title: </label><p></p>
+    <input type="text" asp-for="newTitle" id="_newTitle" name="newTitle"></div><p></p>
+    <div class="songform"><label asp-for="newArtist">Artist: </label><p></p>
+    <input type="text" asp-for="newArtist" id="_newArtist" name = "newArtist"></div><p></p>
+    <div class="songform"><input class="submitButton" type="submit"></div>
+    </p>
+</form>

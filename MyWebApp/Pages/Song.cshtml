@@ -1,0 +1,91 @@
+﻿@page
+@using MyWebApp.Models
+@using MyWebApp.Services
+@model MyWebApp.Pages.SongModel 
+@{ 
+    ViewData["Title"] = "My Songs"; 
+}
+<head>
+    <style>
+        button{
+            font-size: 11pt;
+        }
+        table{
+            width: 100%;
+            
+        }    
+        th{
+            text-align: center;
+            font-size: 16pt;
+            background-color:pink ;
+
+        }
+        td{
+            text-align: center;
+            font-size: 14pt;
+        }
+        h1{
+            text-align: center;
+            font-family: impact;
+        }
+        tr:nth-child(even) {
+            background-color: mistyrose;
+        }
+        tr:nth-child(odd) {
+            background-color: snow;
+        }
+    </style>
+</head>
+<h1>My Songs</h1>
+<table>                  
+    <thead>
+        <th scope="col">Song ID</th>
+        <th scope="col" style= "margin-left =10px">Title</th>
+        <th scope="col">Artist</th>
+        <th scope="col">Date Added</th>
+        <th scope="col">Faved?</th>
+        <th scope="col"> 
+            <form action = "/AddSong"> 
+                <button> ➕ Add song</button> 
+            </form> 
+        </th> 
+
+    </thead>
+    @foreach (var aSong in Model.allSongs)
+    {
+        <tr>
+            <td> @aSong.songId </td>
+            <td> @aSong.title</td>
+            <td> @aSong.artist</td>
+            <td> @aSong.dateAdded</td>
+            @if (aSong.isFave == true) 
+            { 
+               <td> 
+                    <form method = "post" asp-page-handler="FavButton" asp-route-songIdToFav="@aSong.songId">
+                        <button> &hearts; </button> 
+                    </form>  
+                </td>
+            } 
+            else 
+            { 
+                <td> 
+                    <form method = "post" asp-page-handler="FavButton" asp-route-songIdToFav="@aSong.songId"> 
+                        <button> ♡ </button>
+                    </form> 
+                </td>
+            }
+            <td> 
+                <form method = "post" asp-page-handler="DeleteButton" asp-route-songIdToDelete="@aSong.songId"> 
+                    <button>Delete song</button> 
+                </form> 
+            </td>
+
+
+        </tr>
+    }
+
+
+
+
+</table>
+
